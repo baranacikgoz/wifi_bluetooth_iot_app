@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:bluetooth_repository/core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,7 +9,8 @@ import '../scan_related/scan_results_cubit.dart';
 class DeviceConnectionCubit extends Cubit<DeviceConnectionState> {
   final ScanResultsCubit scanResultsCubit;
   late final StreamSubscription scanResultsSubsription;
-  late StreamSubscription deviceStatesSubscription;
+
+  late StreamSubscription connectedDeviceStateSubscription;
 
   //static const Duration connectTimeOut = Duration(seconds: 20);
 
@@ -43,9 +45,33 @@ class DeviceConnectionCubit extends Cubit<DeviceConnectionState> {
       emit(Disconnected());
     } catch (e) {
       emit(ConnectAttempFailed(device: device, errorMessage: e.toString()));
+      connectedDeviceStateSubscription.cancel();
     }
   }
 
+  StreamSubscription monitorConnectedDeviceState(BluetoothDevice device) {
+    return connectedDeviceStateSubscription = device.state.listen((_deviceState) {
+      log("Device state changed: $_deviceState");
+
+      switch (_deviceState) {
+        case BluetoothDeviceState.disconnected:
+          emit(Disconnected());
+          break;
+
+        // case BluetoothDeviceState.connecting:
+        //   break;
+        // case BluetoothDeviceState.connected:
+        //   break;
+
+        // case BluetoothDeviceState.disconnecting:
+        //   break;
+
+        default:
+          () {};
+          break;
+      }
+    });
+  }
   // StreamSubscription monitorConnectedDevices() {}
 
   // void connectDevice(BluetoothDevice device) async {

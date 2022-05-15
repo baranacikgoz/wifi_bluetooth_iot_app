@@ -96,7 +96,9 @@ Widget _buildConnectedDevice(BuildContext context) {
 Widget _buildDevices(BuildContext context, bool scanState) {
   return BlocBuilder<ScanResultsCubit, List<DeviceResult>>(builder: (context, state) {
     return state.isEmpty
-        ? const CircularProgressIndicator()
+        ? const Center(
+            child: Text("Start a scan!"),
+          )
         : Expanded(
             child: ListView.builder(
                 scrollDirection: Axis.vertical,

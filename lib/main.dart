@@ -47,41 +47,43 @@ class App extends StatelessWidget {
               ? BlocProvider(create: (context) => SwitchThemeCubit(initialTheme: AppTheme.lightTheme))
               : BlocProvider(create: (context) => SwitchThemeCubit(initialTheme: AppTheme.darkTheme))
         ],
-        child: MultiBlocListener(
-          listeners: [
-            BlocListener<BluetoothStatusCubit, BluetoothStatus>(
-              //listenWhen: (previous, current) => previous != current,
-              listener: (context, state) {
-                if (state != BluetoothState.on) {
-                  //! onBluetoothOff
-                } else {
-                  //! onBluetoothOn
-                }
-              },
-            ),
-            BlocListener<DeviceConnectionCubit, DeviceConnectionState>(
-              listener: (context, state) {
-                if (state is AttempFailed) {
-                  CustomSnackbar.showSnackbarWithTimedMessage(
-                      context: context, message: "Failed: ${state.errorMessage}");
-                }
-              },
-            ),
-            BlocListener<ScanCubit, bool>(
-              listener: (context, state) {
-                // TODO: implement listener
-              },
-            )
-          ],
-          child: Builder(builder: (context) {
-            return MaterialApp(
-              title: Strings.appTitle,
-              theme: BlocProvider.of<SwitchThemeCubit>(context, listen: true).state,
-              debugShowCheckedModeBanner: false,
-              //initialRoute: AppRouter.findDevicesScreen,
-              onGenerateRoute: AppRouter.onGenerateRoute,
-            );
-          }),
-        ));
+        child: Builder(builder: (context) {
+          return MultiBlocListener(
+            listeners: [
+              BlocListener<BluetoothStatusCubit, BluetoothStatus>(
+                //listenWhen: (previous, current) => previous != current,
+                listener: (context, state) {
+                  if (state != BluetoothState.on) {
+                    //! onBluetoothOff
+                  } else {
+                    //! onBluetoothOn
+                  }
+                },
+              ),
+              BlocListener<DeviceConnectionCubit, DeviceConnectionState>(
+                listener: (context, state) {
+                  if (state is AttempFailed) {
+                    CustomSnackbar.showSnackbarWithTimedMessage(
+                        context: context, message: "Failed: ${state.errorMessage}");
+                  }
+                },
+              ),
+              BlocListener<ScanCubit, bool>(
+                listener: (context, state) {
+                  // TODO: implement listener
+                },
+              )
+            ],
+            child: Builder(builder: (context) {
+              return MaterialApp(
+                title: Strings.appTitle,
+                theme: BlocProvider.of<SwitchThemeCubit>(context, listen: true).state,
+                debugShowCheckedModeBanner: false,
+                //initialRoute: AppRouter.findDevicesScreen,
+                onGenerateRoute: AppRouter.onGenerateRoute,
+              );
+            }),
+          );
+        }));
   }
 }
