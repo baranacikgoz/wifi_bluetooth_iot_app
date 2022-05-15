@@ -10,7 +10,7 @@ class DeviceConnectionCubit extends Cubit<DeviceConnectionState> {
   late final StreamSubscription scanResultsSubsription;
   late StreamSubscription deviceStatesSubscription;
 
-  static const Duration connectTimeOut = Duration(seconds: 5);
+  //static const Duration connectTimeOut = Duration(seconds: 20);
 
   Map<BluetoothDevice, BluetoothDeviceState> _devicesAndStatus = {};
 
@@ -28,10 +28,11 @@ class DeviceConnectionCubit extends Cubit<DeviceConnectionState> {
   void connectDevice(BluetoothDevice device) async {
     emit(TryingToConnect(device: device));
     try {
-      await device.connect(timeout: connectTimeOut);
+      await device.connect();
       emit(Connected(device: device));
     } catch (e) {
       emit(ConnectAttempFailed(device: device, errorMessage: e.toString()));
+      emit(Disconnected());
     }
   }
 

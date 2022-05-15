@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:bluetooth_iot_app/core/themes/app_theme.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
-import 'package:bluetooth_iot_app/logic/bluetooth/device_operations/device_connection.cubit.dart';
+import 'package:bluetooth_iot_app/logic/bluetooth/device_operations/device_connection_cubit.dart';
 import 'package:bluetooth_iot_app/logic/bluetooth/scan_related/scan_cubit.dart';
 import 'package:bluetooth_iot_app/logic/bluetooth/scan_related/scan_results_cubit.dart';
 import 'package:bluetooth_iot_app/ui/independent_widgets/custom_snackbar.dart';

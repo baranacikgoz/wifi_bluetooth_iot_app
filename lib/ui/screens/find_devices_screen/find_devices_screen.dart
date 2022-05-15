@@ -1,7 +1,7 @@
 import 'package:bluetooth_repository/core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:bluetooth_iot_app/logic/bluetooth/device_operations/device_connection.cubit.dart';
+import 'package:bluetooth_iot_app/logic/bluetooth/device_operations/device_connection_cubit.dart';
 import 'package:bluetooth_iot_app/logic/bluetooth/scan_related/scan_cubit.dart';
 import 'package:bluetooth_iot_app/logic/bluetooth/scan_related/scan_results_cubit.dart';
 import 'package:bluetooth_iot_app/ui/screens/find_devices_screen/widgets/widgets.dart';
@@ -41,7 +41,9 @@ Widget _buildConnectedDevice(BuildContext context) {
     builder: (context, state) {
       if (state is Connected) {
         return Card(
-          elevation: 4,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+          elevation: 8,
+          margin: const EdgeInsets.only(left: 7, top: 6, bottom: 12, right: 7),
           child: Column(
             children: [
               ListTile(
