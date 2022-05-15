@@ -117,20 +117,21 @@ Column _connectedToAnotherDeviceView(
           padding: const EdgeInsets.all(16.0),
           alignment: Alignment.centerLeft,
           child: const Text("Connected to another device")),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      Column(
         children: [
           TextButton(
               onPressed: () => AppRouter.pushWithArgument(
                   context: context,
                   pageName: AppRouter.deviceScreen,
                   args: DeviceScreenArgs(device: otherDeviceThatConnected)),
-              child: const Text("Go to the connected device")),
+              child: const Expanded(child: Text("Go to the connected device"))),
           TextButton(
               onPressed: () => context.read<DeviceConnectionCubit>().disconnectDevice(otherDeviceThatConnected),
-              child: const Text(
-                "Disconnect the connected device",
-                style: TextStyle(color: Colors.redAccent),
+              child: const Expanded(
+                child: Text(
+                  "Disconnect the connected device",
+                  style: TextStyle(color: Colors.redAccent),
+                ),
               ))
         ],
       )
