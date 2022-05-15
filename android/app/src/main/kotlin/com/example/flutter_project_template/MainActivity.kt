@@ -1,4 +1,4 @@
-package com.example.iot_connect_app
+package com.example.bluetooth_iot_app
 
 import io.flutter.embedding.android.FlutterActivity
 

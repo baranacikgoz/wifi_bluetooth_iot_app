@@ -1,6 +1,6 @@
 {
-    "name": "iot_connect_app",
-    "short_name": "iot_connect_app",
+    "name": "bluetooth_iot_app",
+    "short_name": "bluetooth_iot_app",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

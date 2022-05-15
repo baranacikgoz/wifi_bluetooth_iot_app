@@ -3,7 +3,7 @@ import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:bluetooth_repository/core.dart';
-import 'package:iot_connect_app/core/instances.dart';
+import 'package:bluetooth_iot_app/core/instances.dart';
 
 class ScanCubit extends Cubit<bool> {
   final BluetoothRepository _repository = bluetoothRepositoryInstance;

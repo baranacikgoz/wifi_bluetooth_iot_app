@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.14)
-project(iot_connect_app LANGUAGES CXX)
+project(bluetooth_iot_app LANGUAGES CXX)
 
-set(BINARY_NAME "iot_connect_app")
+set(BINARY_NAME "bluetooth_iot_app")
 
 cmake_policy(SET CMP0063 NEW)
 

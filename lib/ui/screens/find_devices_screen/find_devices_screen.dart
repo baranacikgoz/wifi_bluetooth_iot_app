@@ -1,10 +1,10 @@
 import 'package:bluetooth_repository/core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:iot_connect_app/logic/bluetooth/device_operations/device_connection.cubit.dart';
-import 'package:iot_connect_app/logic/bluetooth/scan_related/scan_cubit.dart';
-import 'package:iot_connect_app/logic/bluetooth/scan_related/scan_results_cubit.dart';
-import 'package:iot_connect_app/ui/screens/find_devices_screen/widgets/widgets.dart';
+import 'package:bluetooth_iot_app/logic/bluetooth/device_operations/device_connection.cubit.dart';
+import 'package:bluetooth_iot_app/logic/bluetooth/scan_related/scan_cubit.dart';
+import 'package:bluetooth_iot_app/logic/bluetooth/scan_related/scan_results_cubit.dart';
+import 'package:bluetooth_iot_app/ui/screens/find_devices_screen/widgets/widgets.dart';
 
 import '../../../core/constants/strings.dart';
 
