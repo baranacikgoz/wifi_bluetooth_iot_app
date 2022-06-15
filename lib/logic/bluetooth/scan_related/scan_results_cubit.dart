@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:bluetooth_repository/core.dart';
-import 'package:bluetooth_iot_app/core/instances.dart';
+import 'package:wifi_bluetooth_iot_app/core/instances.dart';
 
 class ScanResultsCubit extends Cubit<List<DeviceResult>> {
   late final StreamSubscription scanResultsSubscription;
@@ -12,7 +12,8 @@ class ScanResultsCubit extends Cubit<List<DeviceResult>> {
   }
 
   StreamSubscription<List<DeviceResult>> monitorScanResults() {
-    return scanResultsSubscription = bluetoothRepositoryInstance.scanResults.listen((result) {
+    return scanResultsSubscription =
+        BluetoothRepository.instance.scanResults.listen((result) {
       emit(result);
     });
   }

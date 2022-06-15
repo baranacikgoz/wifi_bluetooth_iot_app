@@ -8,12 +8,13 @@ import '../../core/instances.dart';
 class BluetoothStatusCubit extends Cubit<BluetoothStatus> {
   late final StreamSubscription bluetoothStatusSubscription;
 
-  BluetoothStatusCubit() : super(BluetoothStatus.UNKNOWN) {
+  BluetoothStatusCubit() : super(BluetoothStatus.unknown) {
     monitorBluetoothStatus();
   }
 
   StreamSubscription<BluetoothStatus> monitorBluetoothStatus() {
-    return bluetoothStatusSubscription = bluetoothRepositoryInstance.status.listen((status) {
+    return bluetoothStatusSubscription =
+        BluetoothRepository.instance.status.listen((status) {
       emit(status);
     });
   }

@@ -1,6 +1,6 @@
-import 'package:bluetooth_iot_app/core/constants/strings.dart';
-import 'package:bluetooth_iot_app/logic/bluetooth/device_operations/device_connection_cubit.dart';
-import 'package:bluetooth_iot_app/ui/independent_widgets/custom_app_bar.dart';
+import 'package:wifi_bluetooth_iot_app/core/constants/strings.dart';
+import 'package:wifi_bluetooth_iot_app/logic/bluetooth/device_operations/device_connection_cubit.dart';
+import 'package:wifi_bluetooth_iot_app/ui/independent_widgets/custom_app_bar.dart';
 import 'package:bluetooth_repository/core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -62,12 +62,15 @@ Column _buildNotConnectedView(BuildContext context, BluetoothDevice _device) {
         leading: const Icon(Icons.bluetooth_disabled),
       ),
       Container(
-          padding: const EdgeInsets.all(16.0), alignment: Alignment.centerLeft, child: const Text("Not connected")),
+          padding: const EdgeInsets.all(16.0),
+          alignment: Alignment.centerLeft,
+          child: const Text("Not connected")),
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           TextButton(
-              onPressed: () => context.read<DeviceConnectionCubit>().connectDevice(_device),
+              onPressed: () =>
+                  context.read<DeviceConnectionCubit>().connectDevice(_device),
               child: const Text(
                 "Connect",
                 style: TextStyle(color: Colors.redAccent),
@@ -93,7 +96,8 @@ Column _deviceConnectedView(BuildContext context, BluetoothDevice _device) {
           alignment: Alignment.centerLeft,
           child: const Text("Connected to this device")),
       TextButton(
-          onPressed: () => context.read<DeviceConnectionCubit>().disconnectDevice(_device),
+          onPressed: () =>
+              context.read<DeviceConnectionCubit>().disconnectDevice(_device),
           child: const Text(
             "Disconnect",
             style: TextStyle(color: Colors.redAccent),
@@ -102,8 +106,8 @@ Column _deviceConnectedView(BuildContext context, BluetoothDevice _device) {
   );
 }
 
-Column _connectedToAnotherDeviceView(
-    BuildContext context, BluetoothDevice _thisDevice, BluetoothDevice otherDeviceThatConnected) {
+Column _connectedToAnotherDeviceView(BuildContext context, BluetoothDevice _thisDevice,
+    BluetoothDevice otherDeviceThatConnected) {
   final String _name = _thisDevice.name;
   final String _id = _thisDevice.id.id;
   return Column(
@@ -126,7 +130,9 @@ Column _connectedToAnotherDeviceView(
                   args: DeviceScreenArgs(device: otherDeviceThatConnected)),
               child: const Expanded(child: Text("Go to the connected device"))),
           TextButton(
-              onPressed: () => context.read<DeviceConnectionCubit>().disconnectDevice(otherDeviceThatConnected),
+              onPressed: () => context
+                  .read<DeviceConnectionCubit>()
+                  .disconnectDevice(otherDeviceThatConnected),
               child: const Expanded(
                 child: Text(
                   "Disconnect the connected device",
@@ -157,7 +163,8 @@ Column _buildTryingToConnectView(BuildContext context, BluetoothDevice _device) 
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           TextButton(
-              onPressed: () => context.read<DeviceConnectionCubit>().disconnectDevice(_device),
+              onPressed: () =>
+                  context.read<DeviceConnectionCubit>().disconnectDevice(_device),
               child: const Text(
                 "Cancel",
                 style: TextStyle(color: Colors.redAccent),

@@ -1,7 +1,10 @@
-include: package:flutter_lints/flutter.yaml
+include: package:very_good_analysis/analysis_options.yaml
 
-# Additional information about this file can be found at
-# https://dart.dev/guides/language/analysis-options
+
 linter:
   rules:
-    constant_identifier_names: false
+    omit_local_variable_types: false
+    public_member_api_docs: false
+    sort_constructors_first: false
+    sort_unnamed_constructors_first: false
+    lines_longer_than_80_chars: false

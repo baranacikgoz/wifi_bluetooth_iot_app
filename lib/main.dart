@@ -2,13 +2,13 @@ import 'package:bluetooth_repository/core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:bluetooth_iot_app/core/themes/app_theme.dart';
+import 'package:wifi_bluetooth_iot_app/core/themes/app_theme.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
-import 'package:bluetooth_iot_app/logic/bluetooth/device_operations/device_connection_cubit.dart';
-import 'package:bluetooth_iot_app/logic/bluetooth/scan_related/scan_cubit.dart';
-import 'package:bluetooth_iot_app/logic/bluetooth/scan_related/scan_results_cubit.dart';
-import 'package:bluetooth_iot_app/ui/independent_widgets/custom_snackbar.dart';
-import 'package:bluetooth_iot_app/ui/router/app_router.dart';
+import 'package:wifi_bluetooth_iot_app/logic/bluetooth/device_operations/device_connection_cubit.dart';
+import 'package:wifi_bluetooth_iot_app/logic/bluetooth/scan_related/scan_cubit.dart';
+import 'package:wifi_bluetooth_iot_app/logic/bluetooth/scan_related/scan_results_cubit.dart';
+import 'package:wifi_bluetooth_iot_app/ui/independent_widgets/custom_snackbar.dart';
+import 'package:wifi_bluetooth_iot_app/ui/router/app_router.dart';
 import 'package:path_provider/path_provider.dart';
 
 import 'core/constants/strings.dart';
@@ -21,14 +21,18 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   final storage = await HydratedStorage.build(
-    storageDirectory: kIsWeb ? HydratedStorage.webStorageDirectory : await getApplicationDocumentsDirectory(),
+    storageDirectory: kIsWeb
+        ? HydratedStorage.webStorageDirectory
+        : await getApplicationDocumentsDirectory(),
   );
 
-  HydratedBlocOverrides.runZoned(() => runApp(App()), storage: storage, blocObserver: AppBlocObserver());
+  HydratedBlocOverrides.runZoned(() => runApp(App()),
+      storage: storage, blocObserver: AppBlocObserver());
 }
 
 class App extends StatelessWidget {
-  final osThemeIsLight = schedularBindingInstance.window.platformBrightness == Brightness.light;
+  final osThemeIsLight =
+      schedularBindingInstance.window.platformBrightness == Brightness.light;
 
   App({Key? key}) : super(key: key);
 
@@ -39,13 +43,18 @@ class App extends StatelessWidget {
           BlocProvider(create: (context) => BluetoothStatusCubit()),
           BlocProvider(create: (context) => ScanCubit()),
           BlocProvider(create: (context) => ScanResultsCubit()),
-          BlocProvider(create: (context) => DeviceConnectionCubit(scanResultsCubit: context.read<ScanResultsCubit>())),
+          BlocProvider(
+              create: (context) => DeviceConnectionCubit(
+                  scanResultsCubit: context.read<ScanResultsCubit>())),
 
           // If Android/IOS theme of the device is light, start app with light theme,
           // else start app with dark theme
           osThemeIsLight
-              ? BlocProvider(create: (context) => SwitchThemeCubit(initialTheme: AppTheme.lightTheme))
-              : BlocProvider(create: (context) => SwitchThemeCubit(initialTheme: AppTheme.darkTheme))
+              ? BlocProvider(
+                  create: (context) =>
+                      SwitchThemeCubit(initialTheme: AppTheme.lightTheme))
+              : BlocProvider(
+                  create: (context) => SwitchThemeCubit(initialTheme: AppTheme.darkTheme))
         ],
         child: Builder(builder: (context) {
           return MultiBlocListener(

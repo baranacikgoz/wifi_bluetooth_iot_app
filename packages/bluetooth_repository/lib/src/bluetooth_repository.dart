@@ -5,7 +5,7 @@ import 'package:flutter_blue/flutter_blue.dart';
 
 export 'package:flutter_blue/flutter_blue.dart';
 
-enum BluetoothStatus { OFF, ON, UNKNOWN }
+enum BluetoothStatus { off, on, unknown }
 
 class StartScanFailed implements Exception {
   final String message;
@@ -16,25 +16,22 @@ class StartScanFailed implements Exception {
 }
 
 BluetoothStatus deserializeBluetoothState(BluetoothState bluetoothState) {
-  switch (bluetoothState) {
-    case BluetoothState.on:
-      return BluetoothStatus.ON;
-
-    case BluetoothState.off:
-      return BluetoothStatus.OFF;
-
-    default:
-      return BluetoothStatus.UNKNOWN;
+  if (bluetoothState == BluetoothState.on) {
+    return BluetoothStatus.on;
+  } else {
+    return BluetoothStatus.off;
   }
 }
 
 class BluetoothRepository {
+  BluetoothRepository._();
+
+  static final instance = BluetoothRepository._();
+
   final _flutterBlueInstance = FlutterBlue.instance;
 
   Stream<BluetoothStatus> get status {
-    return _flutterBlueInstance.state.map((bluetoothState) {
-      return deserializeBluetoothState(bluetoothState);
-    });
+    return _flutterBlueInstance.state.map(deserializeBluetoothState);
   }
 
   Future<dynamic> startScan({required Duration duration}) async {
@@ -44,20 +41,27 @@ class BluetoothRepository {
 
   Stream<List<DeviceResult>> get scanResults {
     return _flutterBlueInstance.scanResults.map((result) {
-      List<DeviceResult> _list = [];
+      final List<DeviceResult> _list = [];
 
-      for (var e in result) {
+      for (final e in result) {
         final BluetoothDevice _bluetoothDevice = e.device;
         final AdvertisementData _advertisementData = e.advertisementData;
 
         final _advertisementValues = AdvertisementValues(
-            localName: _advertisementData.localName,
-            connectable: _advertisementData.connectable,
-            manufacturerData: _advertisementData.manufacturerData,
-            serviceData: _advertisementData.serviceData,
-            serviceUuids: _advertisementData.serviceUuids);
+          localName: _advertisementData.localName,
+          connectable: _advertisementData.connectable,
+          manufacturerData: _advertisementData.manufacturerData,
+          serviceData: _advertisementData.serviceData,
+          serviceUuids: _advertisementData.serviceUuids,
+        );
 
-        _list.add(DeviceResult(device: _bluetoothDevice, advertisementValues: _advertisementValues, rssi: e.rssi));
+        _list.add(
+          DeviceResult(
+            device: _bluetoothDevice,
+            advertisementValues: _advertisementValues,
+            rssi: e.rssi,
+          ),
+        );
       }
 
       return _list;

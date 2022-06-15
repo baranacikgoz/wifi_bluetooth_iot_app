@@ -1,10 +1,10 @@
 import 'package:bluetooth_repository/core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:bluetooth_iot_app/logic/bluetooth/device_operations/device_connection_cubit.dart';
-import 'package:bluetooth_iot_app/logic/bluetooth/scan_related/scan_cubit.dart';
-import 'package:bluetooth_iot_app/logic/bluetooth/scan_related/scan_results_cubit.dart';
-import 'package:bluetooth_iot_app/ui/screens/find_devices_screen/widgets/widgets.dart';
+import 'package:wifi_bluetooth_iot_app/logic/bluetooth/device_operations/device_connection_cubit.dart';
+import 'package:wifi_bluetooth_iot_app/logic/bluetooth/scan_related/scan_cubit.dart';
+import 'package:wifi_bluetooth_iot_app/logic/bluetooth/scan_related/scan_results_cubit.dart';
+import 'package:wifi_bluetooth_iot_app/ui/screens/find_devices_screen/widgets/widgets.dart';
 
 import '../../../core/constants/strings.dart';
 
@@ -81,7 +81,8 @@ Widget _buildConnectedDevice(BuildContext context) {
           children: [
             const Text("Trying to connect a device"),
             ElevatedButton(
-                style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Colors.red)),
+                style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(Colors.red)),
                 onPressed: () => connectionCubit.disconnectDevice(state.device),
                 child: const Text("Cancel"))
           ],
@@ -127,7 +128,9 @@ Widget _buildDevices(BuildContext context, bool scanState) {
 }
 
 Widget _buildRightButton(BuildContext context, bool scanState) {
-  return scanState == false ? const Icon(Icons.arrow_forward_ios) : const Text("Scanning");
+  return scanState == false
+      ? const Icon(Icons.arrow_forward_ios)
+      : const Text("Scanning");
 }
 
 FloatingActionButton _buildScanButton(BuildContext context, bool scanState) {
