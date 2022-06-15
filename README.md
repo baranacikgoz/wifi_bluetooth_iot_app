@@ -1,3 +1,3 @@
 # Wifi Bluetooth Iot App
 ### Contributing
-Feel free to make contributions and pull requests.
+This is an open-source project. Feel free to make contributions and pull requests.
